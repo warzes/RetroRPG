@@ -2,10 +2,150 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Core.cpp">
+      <Filter>RetroEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>RetroEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="RasterizerFloat.cpp">
+      <Filter>RetroEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="RasterizerInteger.cpp">
+      <Filter>RetroEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>RetroEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="BmpCache.cpp">
+      <Filter>RetroEngine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>RetroEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="BmpFile.cpp">
+      <Filter>RetroEngine\FileFormat</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjFile.cpp">
+      <Filter>RetroEngine\FileFormat</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshCache.cpp">
+      <Filter>RetroEngine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexList.cpp">
+      <Filter>RetroEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleList.cpp">
+      <Filter>RetroEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>RetroEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Billboard.cpp">
+      <Filter>RetroEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawingContext.cpp">
+      <Filter>RetroEngine\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>RetroEngine\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Timing.cpp">
+      <Filter>RetroEngine\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Solid.cpp">
+      <Filter>RetroEngine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Collisions.cpp">
+      <Filter>RetroEngine\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="RetroEngine">
       <UniqueIdentifier>{904b3c6e-7df8-419e-861b-ef5b5ef1b6ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RetroEngine\Resource">
+      <UniqueIdentifier>{e55f06fd-584b-4bb1-82e8-0312ab4e92c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RetroEngine\FileFormat">
+      <UniqueIdentifier>{d9445ed7-4dec-4a7d-9fc3-6481dada79dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RetroEngine\Platform">
+      <UniqueIdentifier>{4f1ca0bf-7152-432a-8bd6-44dcaa443049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RetroEngine\Physics">
+      <UniqueIdentifier>{2152c498-90c5-4473-a2eb-cfd555e56205}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Rasterizer.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="RasterizerFloat.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="RasterizerInteger.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Bitmap.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="BmpCache.h">
+      <Filter>RetroEngine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="BmpFile.h">
+      <Filter>RetroEngine\FileFormat</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjFile.h">
+      <Filter>RetroEngine\FileFormat</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshCache.h">
+      <Filter>RetroEngine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexList.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleList.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Billboard.h">
+      <Filter>RetroEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawingContext.h">
+      <Filter>RetroEngine\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>RetroEngine\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Timing.h">
+      <Filter>RetroEngine\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Solid.h">
+      <Filter>RetroEngine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collisions.h">
+      <Filter>RetroEngine\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -102,6 +102,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CallingConvention>FastCall</CallingConvention>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,6 +122,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CallingConvention>FastCall</CallingConvention>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,6 +143,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CallingConvention>FastCall</CallingConvention>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -160,6 +163,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CallingConvention>FastCall</CallingConvention>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -169,7 +173,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Billboard.cpp" />
+    <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="BmpCache.cpp" />
+    <ClCompile Include="BmpFile.cpp" />
+    <ClCompile Include="Collisions.cpp" />
+    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="DrawingContext.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshCache.cpp" />
+    <ClCompile Include="ObjFile.cpp" />
+    <ClCompile Include="RasterizerFloat.cpp" />
+    <ClCompile Include="RasterizerInteger.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Solid.cpp" />
+    <ClCompile Include="Timing.cpp" />
+    <ClCompile Include="TriangleList.cpp" />
+    <ClCompile Include="VertexList.cpp" />
+    <ClCompile Include="Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Billboard.h" />
+    <ClInclude Include="Bitmap.h" />
+    <ClInclude Include="BmpCache.h" />
+    <ClInclude Include="BmpFile.h" />
+    <ClInclude Include="Collisions.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Core.h" />
+    <ClInclude Include="DrawingContext.h" />
+    <ClInclude Include="Geometry.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshCache.h" />
+    <ClInclude Include="ObjFile.h" />
+    <ClInclude Include="Rasterizer.h" />
+    <ClInclude Include="RasterizerFloat.h" />
+    <ClInclude Include="RasterizerInteger.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Solid.h" />
+    <ClInclude Include="Timing.h" />
+    <ClInclude Include="TriangleList.h" />
+    <ClInclude Include="VertexList.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
