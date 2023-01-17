@@ -49,7 +49,7 @@ int main(
 
 	/** Set the renderer properties */
 	renderer.SetFog(true);
-	renderer.SetViewPosition(Vertex(0.0f, 0.0f, 3.0f));
+	renderer.SetViewPosition(Vertex(0.0f, 0.0f, 4.0f));
 	renderer.UpdateViewMatrix();
 	rasterizer.background = Color::RGB(0xC0C0FF);
 
@@ -88,8 +88,8 @@ int main(
 		renderer.Flush();
 	}
 
-	BmpFile screenshot("screenshot.bmp");
-	screenshot.Save(&rasterizer.frame);
+	//BmpFile screenshot("screenshot.bmp");
+	//screenshot.Save(&rasterizer.frame);
 
 	timing.LastFrame();
 }
