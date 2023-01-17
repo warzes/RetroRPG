@@ -23,6 +23,7 @@ public:
 
 	void LoadDirectory(const char* path);
 	Bitmap* LoadBMP(const char* path);
+	Bitmap* LoadPNG(const char* path);
 
 	int GetSlotFromName(const char* name);
 	Bitmap* GetBitmapFromName(const char* name);
@@ -39,12 +40,13 @@ public:
 		int numberExtras;             // Number of extra bitmaps
 		int cursor;                   // Cursor for animation playback
 	};
-	Slot cacheSlots[BMPCACHE_SLOTS];  // Slots in cache
+	Slot cacheSlots[IMAGECACHE_SLOTS];  // Slots in cache
 	int numberSlots = 0;              // Number of cacheSlots in cache
 
 private:
 	int createSlot(Bitmap* bitmap, const char* path);
 	void deleteSlot(int slot);
+	Bitmap* addInSlot(Bitmap* bitmap, const char* path);
 };
 
 extern ImageCache gImageCache;

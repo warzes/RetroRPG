@@ -1,8 +1,9 @@
 #pragma once
 
-#define  _CRT_SECURE_NO_WARNINGS // TODO: delete
-#include "Bitmap.h"
+#include "Core.h"
 #include <stdio.h>
+
+class Bitmap;
 
 // Load and store bitmaps in uncompressed MS Windows bitmap format 
 class BmpFile
@@ -15,7 +16,7 @@ public:
 	void Save(const Bitmap* bitmap);
 
 private:
-	int readBitmap(FILE* file, Bitmap* bitmap);
+	int read(FILE* file, Bitmap* bitmap);
 	int writeBitmap(FILE* file, const Bitmap* bitmap);
 
 	char* m_path = nullptr;

@@ -59,6 +59,9 @@
     <ClCompile Include="Collisions.cpp">
       <Filter>RetroEngine\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="PngFile.cpp">
+      <Filter>RetroEngine\FileFormat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="RetroEngine">
@@ -75,6 +78,9 @@
     </Filter>
     <Filter Include="RetroEngine\Physics">
       <UniqueIdentifier>{2152c498-90c5-4473-a2eb-cfd555e56205}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RetroEngine\Base">
+      <UniqueIdentifier>{ec96798a-d5da-466f-ac06-cce5afdde509}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +152,15 @@
     </ClInclude>
     <ClInclude Include="Collisions.h">
       <Filter>RetroEngine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PngFile.h">
+      <Filter>RetroEngine\FileFormat</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniZlib.h">
+      <Filter>RetroEngine\FileFormat</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniVector.h">
+      <Filter>RetroEngine\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

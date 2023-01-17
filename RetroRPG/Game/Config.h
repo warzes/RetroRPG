@@ -6,7 +6,7 @@
 #define MAX_FILE_PATH      256        // Maximum file path string length
 
 // Data caches
-#define BMPCACHE_SLOTS 1024           // Maximum number of bitmaps in cache
+#define IMAGECACHE_SLOTS 1024         // Maximum number of bitmaps in cache
 #define MESHCACHE_SLOTS 1024          // Maximum number of meshes in cache
 
 // Wavefront object parser

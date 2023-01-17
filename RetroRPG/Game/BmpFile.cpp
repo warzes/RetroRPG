@@ -1,4 +1,5 @@
 #include "BmpFile.h"
+#include "Bitmap.h"
 #include <stdlib.h>
 #include <string.h>
 //-----------------------------------------------------------------------------
@@ -54,7 +55,7 @@ struct BMPCOLORMASK
 #define BI_BITFIELDS		3
 #define BI_ALPHABITFIELDS	6
 //-----------------------------------------------------------------------------
-BmpFile::BmpFile(const char * filename)
+BmpFile::BmpFile(const char* filename)
 {
 	if( filename ) m_path = _strdup(filename);
 }
@@ -69,12 +70,12 @@ Bitmap* BmpFile::Load()
 	FILE* file = fopen(m_path, "rb");
 	if( !file )
 	{
-		printf("bmpFile: file not found %s!\n", m_path);
+		printf("BmpFile: file not found %s!\n", m_path);
 		return NULL;
 	}
 
 	Bitmap* bitmap = new Bitmap();
-	readBitmap(file, bitmap);
+	read(file, bitmap);
 	fclose(file);
 	return bitmap;
 }
@@ -92,7 +93,7 @@ void BmpFile::Save(const Bitmap* bitmap)
 	fclose(file);
 }
 //-----------------------------------------------------------------------------
-int BmpFile::readBitmap(FILE* file, Bitmap* bitmap)
+int BmpFile::read(FILE* file, Bitmap* bitmap)
 {
 	BMPFILEHEADER fileHeader;
 	BMPINFOHEADER infoHeader;

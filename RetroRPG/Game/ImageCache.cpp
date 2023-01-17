@@ -1,6 +1,6 @@
-#define  _CRT_SECURE_NO_WARNINGS // TODO: delete
 #include "ImageCache.h"
 #include "BmpFile.h"
+#include "PngFile.h"
 #ifdef _MSC_VER
 #include "vs-dirent.h"
 #else
@@ -12,7 +12,7 @@ ImageCache gImageCache;
 //-----------------------------------------------------------------------------
 ImageCache::ImageCache()
 {
-	memset(cacheSlots, 0, sizeof(Slot) * BMPCACHE_SLOTS);
+	memset(cacheSlots, 0, sizeof(Slot) * IMAGECACHE_SLOTS);
 
 	// Create the default bitmap (32x32 all white)
 	Bitmap* defBitmap = new Bitmap();
@@ -38,40 +38,9 @@ ImageCache::~ImageCache()
 //-----------------------------------------------------------------------------
 void ImageCache::Clean()
 {
-	for( int i = 0; i < BMPCACHE_SLOTS; i++ )
+	for( int i = 0; i < IMAGECACHE_SLOTS; i++ )
 		deleteSlot(i);
 	numberSlots = 0;
-}
-//-----------------------------------------------------------------------------
-Bitmap* ImageCache::LoadBMP(const char* path)
-{
-	if( numberSlots >= BMPCACHE_SLOTS )
-	{
-		printf("gImageCache: no free cacheSlots!\n");
-		return NULL;
-	}
-
-	BmpFile bmpFile = BmpFile(path);
-	Bitmap* bitmap = bmpFile.Load();
-	if( !bitmap ) return NULL;
-
-	int slot = createSlot(bitmap, path);
-	if( slot < 0 )
-	{
-		delete bitmap;
-		return NULL;
-	}
-
-	bitmap->MakeMipmaps();
-	cacheSlots[slot].flags |= BMPCACHE_MIPMAPPED;
-
-	if( bitmap->flags & BMPCACHE_RGBA )
-	{
-		bitmap->PreMultiply();
-		cacheSlots[slot].flags |= BMPCACHE_RGBA;
-	}
-
-	return bitmap;
 }
 //-----------------------------------------------------------------------------
 void ImageCache::LoadDirectory(const char* path)
@@ -95,13 +64,50 @@ void ImageCache::LoadDirectory(const char* path)
 			printf("gImageCache: loading bitmap: %s\n", filePath);
 			LoadBMP(filePath);
 		}
+
+		if( strcmp(ext, "png") == 0 )
+		{
+			// Load a Windows bmp file
+			snprintf(filePath, MAX_FILE_PATH, "%s/%s", path, dd->d_name);
+			filePath[MAX_FILE_PATH] = '\0';
+			printf("gImageCache: loading bitmap: %s\n", filePath);
+			LoadPNG(filePath);
+		}
 	}
 	closedir(dir);
 }
 //-----------------------------------------------------------------------------
+Bitmap* ImageCache::LoadBMP(const char* path)
+{
+	if( numberSlots >= IMAGECACHE_SLOTS )
+	{
+		printf("gImageCache: no free cacheSlots!\n");
+		return nullptr;
+	}
+
+	BmpFile bmpFile = BmpFile(path);
+	Bitmap* bitmap = bmpFile.Load();
+	if( !bitmap ) return nullptr;
+	return addInSlot(bitmap, path);
+}
+//-----------------------------------------------------------------------------
+Bitmap* ImageCache::LoadPNG(const char* path)
+{
+	if( numberSlots >= IMAGECACHE_SLOTS )
+	{
+		printf("gImageCache: no free cacheSlots!\n");
+		return nullptr;
+	}
+
+	PngFile pngFile = PngFile(path);
+	Bitmap* bitmap = pngFile.Load();
+	if( !bitmap ) return nullptr;
+	return addInSlot(bitmap, path);
+}
+//-----------------------------------------------------------------------------
 int ImageCache::createSlot(Bitmap* bitmap, const char* path)
 {
-	for( int i = 0; i < BMPCACHE_SLOTS; i++ )
+	for( int i = 0; i < IMAGECACHE_SLOTS; i++ )
 	{
 		Slot* slot = &cacheSlots[i];
 		if( slot->bitmap ) continue;
@@ -131,6 +137,27 @@ void ImageCache::deleteSlot(int index)
 	if( slot->extras ) delete[] slot->extras;
 	memset(slot, 0, sizeof(Slot));
 	numberSlots--;
+}
+//-----------------------------------------------------------------------------
+Bitmap* ImageCache::addInSlot(Bitmap* bitmap, const char* path)
+{
+	int slot = createSlot(bitmap, path);
+	if( slot < 0 )
+	{
+		delete bitmap; // TODO: удаляется память?
+		return nullptr;
+	}
+
+	bitmap->MakeMipmaps();
+	cacheSlots[slot].flags |= BMPCACHE_MIPMAPPED;
+
+	if( bitmap->flags & BMPCACHE_RGBA )
+	{
+		bitmap->PreMultiply();
+		cacheSlots[slot].flags |= BMPCACHE_RGBA;
+	}
+
+	return bitmap;
 }
 //-----------------------------------------------------------------------------
 int ImageCache::GetSlotFromName(const char* path)
