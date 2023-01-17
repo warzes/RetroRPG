@@ -1,6 +1,6 @@
 #include "Rasterizer.h"
 #if !RENDERER_INTRASTER
-#include "BmpCache.h"
+#include "ImageCache.h"
 #include <string.h>
 #include <float.h>
 //-----------------------------------------------------------------------------
@@ -34,12 +34,13 @@ void Rasterizer::RasterList(TriangleList* trilist)
 #endif
 
 	m_curTrilist = trilist;
+
 	for (int i = 0; i < trilist->noValid; i++)
 	{
 		m_curTriangle = &trilist->triangles[trilist->srcIndices[i]];
 
 		// Retrieve the material
-		BmpCache::Slot* slot = &bmpCache.cacheSlots[m_curTriangle->diffuseTexture];
+		ImageCache::Slot* slot = &gImageCache.cacheSlots[m_curTriangle->diffuseTexture];
 		Bitmap* bmp = slot->bitmap;
 		if (slot->flags & BMPCACHE_ANIMATION)
 			bmp = &slot->extras[slot->cursor];

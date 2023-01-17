@@ -1,5 +1,5 @@
 #include "ObjFile.h"
-#include "BmpCache.h"
+#include "ImageCache.h"
 //-----------------------------------------------------------------------------
 ObjMaterial defMaterial;
 //-----------------------------------------------------------------------------
@@ -123,7 +123,7 @@ void ObjFile::exportMaterials(FILE* file, const Mesh* mesh)
 		}
 		if( !texNew ) continue;
 
-		char * name = bmpCache.cacheSlots[tex].name;
+		char * name = gImageCache.cacheSlots[tex].name;
 		fprintf(file, "newmtl %s\n", name);
 		fprintf(file, "Ns 0.8\n");
 		fprintf(file, "Ka 1.0 1.0 1.0\n");
@@ -175,7 +175,7 @@ void ObjFile::exportTriangles(FILE* file, const Mesh* mesh)
 			}
 			else
 			{
-				char * name = bmpCache.cacheSlots[tex].name;
+				char * name = gImageCache.cacheSlots[tex].name;
 				fprintf(file, "usemtl %s\n", name);
 			}
 			fprintf(file, "s off\n");
@@ -409,7 +409,7 @@ void ObjFile::importMeshData(FILE* file, Mesh* mesh)
 			int slot = 0;
 			if( m_curMaterial->texture[0] )
 			{
-				slot = bmpCache.GetSlotFromName(m_curMaterial->texture);
+				slot = gImageCache.GetSlotFromName(m_curMaterial->texture);
 				if( !slot ) printf("objFile: using default texture (instead of %s)!\n", m_curMaterial->texture);
 			}
 			mesh->texSlotList[trianglesIndex++] = slot;

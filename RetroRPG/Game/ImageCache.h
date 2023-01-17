@@ -1,6 +1,6 @@
 #pragma once
 
-// Bitmap cache manager
+// Image cache manager
 
 #include "Bitmap.h"
 
@@ -12,12 +12,12 @@ enum BMPCACHE_FLAGS
 	BMPCACHE_MIPMAPPED = 0x04, // Bitmap with computed mipmaps
 };
 
-// Cache and inventory all bitmaps loaded
-class BmpCache
+// Cache and inventory all image loaded
+class ImageCache
 {
 public:
-	BmpCache();
-	~BmpCache();
+	ImageCache();
+	~ImageCache();
 
 	void Clean();
 
@@ -36,15 +36,15 @@ public:
 		int flags;                    // Bitmap format and attributes
 
 		Bitmap* extras;               // Extra bitmaps (for animation)
-		int noExtras;                 // Number of extra bitmaps
+		int numberExtras;             // Number of extra bitmaps
 		int cursor;                   // Cursor for animation playback
 	};
 	Slot cacheSlots[BMPCACHE_SLOTS];  // Slots in cache
-	int noSlots = 0;                  // Number of cacheSlots in cache
+	int numberSlots = 0;              // Number of cacheSlots in cache
 
 private:
 	int createSlot(Bitmap* bitmap, const char* path);
 	void deleteSlot(int slot);
 };
 
-extern BmpCache bmpCache;
+extern ImageCache gImageCache;

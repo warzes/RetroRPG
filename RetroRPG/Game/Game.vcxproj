@@ -175,7 +175,7 @@
   <ItemGroup>
     <ClCompile Include="Billboard.cpp" />
     <ClCompile Include="Bitmap.cpp" />
-    <ClCompile Include="BmpCache.cpp" />
+    <ClCompile Include="ImageCache.cpp" />
     <ClCompile Include="BmpFile.cpp" />
     <ClCompile Include="Collisions.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -197,7 +197,7 @@
   <ItemGroup>
     <ClInclude Include="Billboard.h" />
     <ClInclude Include="Bitmap.h" />
-    <ClInclude Include="BmpCache.h" />
+    <ClInclude Include="ImageCache.h" />
     <ClInclude Include="BmpFile.h" />
     <ClInclude Include="Collisions.h" />
     <ClInclude Include="Color.h" />

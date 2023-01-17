@@ -1,5 +1,5 @@
 #include "Renderer.h"
-#include "BmpCache.h"
+#include "ImageCache.h"
 #include <string.h>
 //-----------------------------------------------------------------------------
 Renderer::Renderer(int width, int height) 
@@ -268,7 +268,7 @@ int Renderer::build(const Mesh* mesh, Vertex vertexes[], Triangle tris[], int in
 		// Fetch triangle properties
 		const int texSlot = mesh->texSlotList[i];
 		int subFlags = flags;
-		if (bmpCache.cacheSlots[texSlot].flags & BITMAP_RGBA)
+		if (gImageCache.cacheSlots[texSlot].flags & BITMAP_RGBA)
 			subFlags |= TRIANGLE_BLENDED;
 
 		// Copy coordinates (for clipping)
@@ -337,7 +337,7 @@ int Renderer::build(const BillboardSet* bset, Vertex vertexes[], Triangle tris[]
 		// Fetch billboard properties
 		const int texSlot = bset->texSlots[i];
 		int subFlags = flags;
-		if (bmpCache.cacheSlots[texSlot].flags & BITMAP_RGBA)
+		if (gImageCache.cacheSlots[texSlot].flags & BITMAP_RGBA)
 			subFlags |= TRIANGLE_BLENDED;
 
 		// First triangle

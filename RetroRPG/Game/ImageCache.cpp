@@ -1,5 +1,5 @@
 #define  _CRT_SECURE_NO_WARNINGS // TODO: delete
-#include "BmpCache.h"
+#include "ImageCache.h"
 #include "BmpFile.h"
 #ifdef _MSC_VER
 #include "vs-dirent.h"
@@ -8,9 +8,9 @@
 #endif
 #include <string.h>
 //-----------------------------------------------------------------------------
-BmpCache bmpCache;
+ImageCache gImageCache;
 //-----------------------------------------------------------------------------
-BmpCache::BmpCache()
+ImageCache::ImageCache()
 {
 	memset(cacheSlots, 0, sizeof(Slot) * BMPCACHE_SLOTS);
 
@@ -24,30 +24,30 @@ BmpCache::BmpCache()
 	defSlot->bitmap = defBitmap;
 	strcpy(defSlot->path, "none");
 	strcpy(defSlot->name, "default");
-	defSlot->extras = NULL;
-	defSlot->noExtras = 0;
+	defSlot->extras = nullptr;
+	defSlot->numberExtras = 0;
 	defSlot->cursor = 0;
 	defSlot->flags = 0;
-	noSlots = 1;
+	numberSlots = 1;
 }
 //-----------------------------------------------------------------------------
-BmpCache::~BmpCache()
+ImageCache::~ImageCache()
 {
 	Clean();
 }
 //-----------------------------------------------------------------------------
-void BmpCache::Clean()
+void ImageCache::Clean()
 {
 	for( int i = 0; i < BMPCACHE_SLOTS; i++ )
 		deleteSlot(i);
-	noSlots = 0;
+	numberSlots = 0;
 }
 //-----------------------------------------------------------------------------
-Bitmap* BmpCache::LoadBMP(const char* path)
+Bitmap* ImageCache::LoadBMP(const char* path)
 {
-	if( noSlots >= BMPCACHE_SLOTS )
+	if( numberSlots >= BMPCACHE_SLOTS )
 	{
-		printf("bmpCache: no free cacheSlots!\n");
+		printf("gImageCache: no free cacheSlots!\n");
 		return NULL;
 	}
 
@@ -74,7 +74,7 @@ Bitmap* BmpCache::LoadBMP(const char* path)
 	return bitmap;
 }
 //-----------------------------------------------------------------------------
-void BmpCache::LoadDirectory(const char* path)
+void ImageCache::LoadDirectory(const char* path)
 {
 	char ext[MAX_FILE_EXTENSION + 1];
 	char filePath[MAX_FILE_PATH + 1];
@@ -92,14 +92,14 @@ void BmpCache::LoadDirectory(const char* path)
 			// Load a Windows bmp file
 			snprintf(filePath, MAX_FILE_PATH, "%s/%s", path, dd->d_name);
 			filePath[MAX_FILE_PATH] = '\0';
-			printf("bmpCache: loading bitmap: %s\n", filePath);
+			printf("gImageCache: loading bitmap: %s\n", filePath);
 			LoadBMP(filePath);
 		}
 	}
 	closedir(dir);
 }
 //-----------------------------------------------------------------------------
-int BmpCache::createSlot(Bitmap* bitmap, const char* path)
+int ImageCache::createSlot(Bitmap* bitmap, const char* path)
 {
 	for( int i = 0; i < BMPCACHE_SLOTS; i++ )
 	{
@@ -114,32 +114,32 @@ int BmpCache::createSlot(Bitmap* bitmap, const char* path)
 
 		// Initialize the flags
 		slot->extras = NULL;
-		slot->noExtras = 0;
+		slot->numberExtras = 0;
 		slot->cursor = 0;
 		slot->flags = 0;
 
-		noSlots++;
+		numberSlots++;
 		return i;
 	}
 	return -1;
 }
 //-----------------------------------------------------------------------------
-void BmpCache::deleteSlot(int index)
+void ImageCache::deleteSlot(int index)
 {
 	Slot* slot = &cacheSlots[index];
 	if( slot->bitmap ) delete slot->bitmap;
 	if( slot->extras ) delete[] slot->extras;
 	memset(slot, 0, sizeof(Slot));
-	noSlots--;
+	numberSlots--;
 }
 //-----------------------------------------------------------------------------
-int BmpCache::GetSlotFromName(const char* path)
+int ImageCache::GetSlotFromName(const char* path)
 {
 	char name[MAX_FILE_NAME + 1];
 	Global::getFileName(name, MAX_FILE_NAME, path);
 
 	// Search for resource
-	for( int i = 0; i < noSlots; i++ )
+	for( int i = 0; i < numberSlots; i++ )
 	{
 		Slot* slot = &cacheSlots[i];
 		if( !slot->bitmap ) continue;
@@ -148,11 +148,11 @@ int BmpCache::GetSlotFromName(const char* path)
 	}
 
 	// Resource not found
-	printf("bmpCache: %s not found!\n", path);
+	printf("gImageCache: %s not found!\n", path);
 	return 0;
 }
 //-----------------------------------------------------------------------------
-Bitmap* BmpCache::GetBitmapFromName(const char* path)
+Bitmap* ImageCache::GetBitmapFromName(const char* path)
 {
 	int slot = GetSlotFromName(path);
 	return cacheSlots[slot].bitmap;
