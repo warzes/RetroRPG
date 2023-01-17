@@ -23,7 +23,7 @@ public:
 
 	void LoadDirectory(const char* path);
 	Bitmap* LoadBMP(const char* path);
-	Bitmap* LoadPNG(const char* path);
+	Bitmap* LoadSTB(const char* path);
 
 	int GetSlotFromName(const char* name);
 	Bitmap* GetBitmapFromName(const char* name);

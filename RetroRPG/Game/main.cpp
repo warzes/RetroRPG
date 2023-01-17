@@ -7,8 +7,6 @@
 #include "Timing.h"
 #include "Light.h"
 #include "BmpFile.h"
-#include "MiniVector.h"
-
 //https://github.com/iikare/picoPNG
 //https://github.com/skywind3000/mini3d/blob/master/mini3d.c
 //https://github.com/search?l=C&q=software+renderer&type=Repositories

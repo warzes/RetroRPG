@@ -1,6 +1,6 @@
 #include "ImageCache.h"
 #include "BmpFile.h"
-#include "PngFile.h"
+#include "StbLoaderFile.h"
 #ifdef _MSC_VER
 #include "vs-dirent.h"
 #else
@@ -65,13 +65,13 @@ void ImageCache::LoadDirectory(const char* path)
 			LoadBMP(filePath);
 		}
 
-		if( strcmp(ext, "png") == 0 )
+		if( strcmp(ext, "png") == 0 
+			|| strcmp(ext, "jpg") == 0 )
 		{
-			// Load a Windows bmp file
 			snprintf(filePath, MAX_FILE_PATH, "%s/%s", path, dd->d_name);
 			filePath[MAX_FILE_PATH] = '\0';
 			printf("gImageCache: loading bitmap: %s\n", filePath);
-			LoadPNG(filePath);
+			LoadSTB(filePath);
 		}
 	}
 	closedir(dir);
@@ -91,7 +91,7 @@ Bitmap* ImageCache::LoadBMP(const char* path)
 	return addInSlot(bitmap, path);
 }
 //-----------------------------------------------------------------------------
-Bitmap* ImageCache::LoadPNG(const char* path)
+Bitmap* ImageCache::LoadSTB(const char* path)
 {
 	if( numberSlots >= IMAGECACHE_SLOTS )
 	{
@@ -99,8 +99,8 @@ Bitmap* ImageCache::LoadPNG(const char* path)
 		return nullptr;
 	}
 
-	PngFile pngFile = PngFile(path);
-	Bitmap* bitmap = pngFile.Load();
+	StbFile stbFile = StbFile(path);
+	Bitmap* bitmap = stbFile.Load();
 	if( !bitmap ) return nullptr;
 	return addInSlot(bitmap, path);
 }

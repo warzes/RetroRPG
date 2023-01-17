@@ -59,7 +59,7 @@
     <ClCompile Include="Collisions.cpp">
       <Filter>RetroEngine\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="PngFile.cpp">
+    <ClCompile Include="StbLoaderFile.cpp">
       <Filter>RetroEngine\FileFormat</Filter>
     </ClCompile>
   </ItemGroup>
@@ -153,14 +153,11 @@
     <ClInclude Include="Collisions.h">
       <Filter>RetroEngine\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="PngFile.h">
-      <Filter>RetroEngine\FileFormat</Filter>
-    </ClInclude>
     <ClInclude Include="MiniZlib.h">
       <Filter>RetroEngine\FileFormat</Filter>
     </ClInclude>
-    <ClInclude Include="MiniVector.h">
-      <Filter>RetroEngine\Base</Filter>
+    <ClInclude Include="StbLoaderFile.h">
+      <Filter>RetroEngine\FileFormat</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
